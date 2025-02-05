@@ -2,18 +2,17 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      python: 3.13
     commands:
-      # Install dependencies
       - echo "Installing dependencies..."
-      - pip install --upgrade pip
       - pip install -r requirements.txt
 
   build:
     commands:
-      # Build the application (if needed)
-      - echo "Building the application..."
-      - zip -r app.zip lambda_function.py
+      - echo "Running tests..."
+      - pytest test_calculator.py --junitxml=report.xml
 
 artifacts:
   files:
-    - app.zip
+    - report.xml
